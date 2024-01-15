@@ -123,15 +123,15 @@ export namespace Trap {
       const { id, app } = argv.session
       const user = Trap.user.get(argv.session.user, userAccess.readable)
       const channel = Trap.channel.get(argv.session.channel, channelAccess.readable)
-      const payload = { id, user, channel, userWritable, channelWritable }
-      const inactive = !app.$internal._sessions[id]
-      app.$internal._sessions[id] = argv.session
+      const payload = { id: id.toString(), user, channel, userWritable, channelWritable } // TODO: what is this
+      const inactive = !app.$processor._sessions[id]
+      app.$processor._sessions[id] = argv.session
       try {
         const prev = await argv.next()
         if (prev) return prev
         return await action({ ...argv, payload }, ...args)
       } finally {
-        if (inactive) delete app.$internal._sessions[id]
+        if (inactive) delete app.$processor._sessions[id]
       }
     }, true)
   }
@@ -141,7 +141,7 @@ export class MainHandle {
   constructor(public ctx: Context) {}
 
   private getSession(uuid: string) {
-    const session = this.ctx.$internal._sessions[uuid]
+    const session = this.ctx.$processor._sessions[uuid]
     if (!session) throw new Error(`session ${uuid} not found`)
     return session
   }

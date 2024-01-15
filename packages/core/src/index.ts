@@ -65,6 +65,9 @@ const logger = new Logger('eval')
 Context.service('worker')
 
 export const name = 'eval'
+export const inject = {
+  optional: ['worker'],
+}
 
 export function apply(ctx: Context, config: Config = {}) {
   const { prefix, authority } = config = { ...defaultConfig, ...config }
@@ -144,8 +147,8 @@ export function apply(ctx: Context, config: Config = {}) {
   })
 
   if (prefix) {
-    command.shortcut(new RegExp(`^${escapeRegExp(prefix)} (.+)$`), { args: ['$1'] })
-    command.shortcut(new RegExp(`^${escapeRegExp(prefix + prefix[prefix.length - 1])} (.+)$`), { args: ['$1'], options: { slient: true } })
+    command.shortcut(new RegExp(`^&gt; (.+)$`), { args: ['$1'] })
+    command.shortcut(new RegExp(`^&gt;&gt; (.+)$`), { args: ['$1'], options: { slient: true } })
   }
 
   Argv.interpolate('${', '}', (raw) => {

@@ -1,5 +1,5 @@
 {
-  "name": "koishi-plugin-eval",
+  "name": "@r0x5a/koishi-plugin-eval",
   "version": "4.1.4",
   "description": "Execute JavaScript and create addons in Koishi",
   "main": "lib/index.js",
@@ -19,15 +19,15 @@
     "lib"
   ],
   "license": "MIT",
-  "author": "Shigma <shigma10826@gmail.com>",
+  "author": "r0x5a <155115880+r0x5a@users.noreply.github.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/koishijs/koishi.git"
+    "url": "git+https://github.com/r0x5a/koishi-plugin-eval.git"
   },
   "bugs": {
-    "url": "https://github.com/koishijs/koishi/issues"
+    "url": "https://github.com/r0x5a/koishi-plugin-eval/issues"
   },
-  "homepage": "https://eval.koishi.chat",
+  "homepage": "https://github.com/r0x5a/koishi-plugin-eval",
   "keywords": [
     "bot",
     "chatbot",
@@ -57,7 +57,7 @@
     "coffeescript": "^2.7.0",
     "esbuild": "*",
     "json5": "^2.2.1",
-    "typescript": "4.8.2"
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "js-yaml": "^4.1.0",
