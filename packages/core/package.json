@@ -60,7 +60,9 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@koishijs/utils": "^7.1.2",
     "js-yaml": "^4.1.0",
+    "reggol": "^1.6.3",
     "simple-git": "^3.14.0"
   },
   "devDependencies": {
