@@ -1,6 +1,6 @@
 import { Argv, Awaitable, Command, Context, defineProperty, escapeRegExp, Logger, noop, segment } from 'koishi'
 import { Config, EvalConfig, EvalWorker, Trap } from './main'
-import {} from '@koishijs/plugin-help'
+import { } from '@koishijs/plugin-help'
 import { resolve } from 'path'
 import { load } from 'js-yaml'
 import { promises as fs } from 'fs'
@@ -62,14 +62,14 @@ const defaultConfig: EvalConfig = {
 
 const logger = new Logger('eval')
 
-Context.service('worker')
-
 export const name = 'eval'
 export const inject = {
   optional: ['worker'],
 }
 
 export function apply(ctx: Context, config: Config = {}) {
+  ctx.root.provide('worker')
+
   const { prefix, authority } = config = { ...defaultConfig, ...config }
 
   ctx.worker = new EvalWorker(ctx, config)
