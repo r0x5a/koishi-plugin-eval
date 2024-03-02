@@ -21,3 +21,5 @@ report.*.json
 *.ntvs*
 *.njsproj
 *.sln
+
+tsconfig.temp.json
