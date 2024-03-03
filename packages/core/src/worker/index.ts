@@ -117,6 +117,9 @@ export const createSession = ({ id, user, userWritable, channel, channelWritable
   }),
 
   async send(...param: [string, ...any[]]) {
+    if (user.authority < 2) {
+      throw new Error('premission denied to call send()')
+    }
     const content = formatResult(...param)
     if (!content) return
     await main.send(id, content)
