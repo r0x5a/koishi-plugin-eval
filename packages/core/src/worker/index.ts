@@ -219,7 +219,10 @@ export function mapDirectory(identifier: string, filename: string) {
   const sourceMap = findSourceMap(filename)
   if (!sourceMap) return logger.debug('cannot find source map for %c', filename)
   const path = dirname(sourceMap.payload.sources[0].slice(7)) + sep
-  pathMapper[identifier] = new RegExp(`(at | \\()${escapeRegExp(path)}`, 'g')
+  if (path.includes('core/src'))
+    pathMapper[identifier] = new RegExp(`(at | \\()(${escapeRegExp(path)}|${escapeRegExp(path.replace('core/src', 'core/lib'))})`, 'g')
+  else
+    pathMapper[identifier] = new RegExp(`(at | \\()${escapeRegExp(path)}`, 'g')
 }
 
 Object.values(config.setupFiles).map(require)
