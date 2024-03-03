@@ -13,6 +13,10 @@ export interface MainConfig extends Trap.Config {
   timeout?: number
   scriptLoader?: string
   resourceLimits?: ResourceLimits
+  outputLimits?: {
+    maxLines: number
+    maxChars: number
+  }
   dataKeys?: (keyof WorkerData)[]
   gitRemote?: string
   exclude?: RegExp
@@ -34,6 +38,10 @@ export const Config = Schema.object({
     codeRangeSizeMb: Schema.number(),
     stackSizeMb: Schema.number(),
   }).description('资源限制'),
+  outputLimits: Schema.object({
+    maxLines: Schema.number().default(20).description('最多允许的输出行数。'),
+    maxChars: Schema.number().default(1024).description('最多允许的输出字符数。'),
+  }).description('输出限制'),
 }) as Schema<Config>
 
 export class Trap<O extends {}> {

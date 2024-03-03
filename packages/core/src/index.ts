@@ -58,6 +58,10 @@ const defaultConfig: EvalConfig = {
   channelFields: ['id'],
   userFields: ['id', 'authority'],
   dataKeys: ['inspect', 'moduleLoaders', 'setupFiles', 'loaderConfig', 'serializer'],
+  outputLimits: {
+    maxChars: 512,
+    maxLines: 20,
+  }
 }
 
 const logger = new Logger('eval')
@@ -121,6 +125,14 @@ export function apply(ctx: Context, config: Config = {}) {
         clearTimeout(timer)
         session._isEval = false
         dispose()
+
+        if (content)
+          content = content
+            .split('\n')
+            .slice(0, config.outputLimits.maxLines)
+            .join('\n')
+            .slice(0, config.outputLimits.maxChars)
+
         resolve(content)
       }
 
