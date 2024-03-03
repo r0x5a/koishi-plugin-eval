@@ -1,6 +1,6 @@
 import { Channel, Command, Context, Argv as IArgv, Logger, Observed, pick, Schema, union, User } from 'koishi'
 import { ResourceLimits, Worker } from 'worker_threads'
-import { Loader, SessionData, WorkerConfig, WorkerData, WorkerHandle } from './worker'
+import type { Loader, SessionData, WorkerConfig, WorkerData, WorkerHandle } from './worker'
 import { expose, Remote, wrap } from './transfer'
 import { builtin } from './loaders'
 import { resolve } from 'path'
@@ -240,6 +240,10 @@ export class EvalWorker {
         ...pick(this.config, this.config.dataKeys),
       },
       resourceLimits: this.config.resourceLimits,
+    })
+    this.worker.on('error', err => {
+      logger.error('worker error')
+      logger.error(err)
     })
 
     expose(this.worker, this.local)

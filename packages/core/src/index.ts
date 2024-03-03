@@ -5,7 +5,7 @@ import { resolve } from 'path'
 import { load } from 'js-yaml'
 import { promises as fs } from 'fs'
 import Git, { CheckRepoActions } from 'simple-git'
-import { WorkerResponse } from './worker'
+import type { WorkerResponse } from './worker'
 
 export * from './main'
 
